@@ -25,6 +25,17 @@ while True:
 
     else:
         print('Fun Hours')
+        with open(hosts_path,'r+') as file:
+            # file.readlines() will return a list with all the lines in the file
+            content=file.readlines()
+            # file.seek(0) places the pointer before the first character in file
+            file.seek(0)
+            for line in content:
+                # With any() we see if any element is not false.
+                if not any(website in line for website in website_list):
+                    file.write(line)
+                # file.truncate() removes all the characters after the pointer
+                file.truncate()
 
     # time.sleep() makes the loop wait for some time until executing again
     time.sleep(5)
